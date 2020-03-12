@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -53,6 +55,15 @@ public class FXMLController {
 
     @FXML
     private RadioButton radDifficile;
+    
+    @FXML
+    private Label txtRange;
+    
+    @FXML
+    private CheckBox ckAssistita;
+    
+    @FXML
+    private HBox layoutRange;
 
     @FXML
     void doNuova(ActionEvent event) {
@@ -70,6 +81,7 @@ public class FXMLController {
     	layoutTentativo.setDisable(false);
     	txtRisultato.clear();
     	barProgresso.setProgress(0);
+    	txtRange.setText(partita.getRange());
     }
 
     @FXML
@@ -80,10 +92,21 @@ public class FXMLController {
     	txtRisultato.appendText(partita.doTentativo(ts));
     	barProgresso.setProgress(partita.getProgresso());
     	
+    	txtRange.setText(partita.getRange());
+    		
     	if(!partita.isInGioco()) {
     		layoutTentativo.setDisable(true);
     	}
     		
+    }
+    
+    @FXML
+    void doAssistita(ActionEvent event) {
+    	if(ckAssistita.isSelected()) {
+    		layoutRange.setVisible(true);
+    	}else {
+    		layoutRange.setVisible(false);
+    	}
     }
 
     @FXML
@@ -98,5 +121,8 @@ public class FXMLController {
         assert difficoltà != null : "fx:id=\"Difficoltà\" was not injected: check your FXML file 'Scene.fxml'.";
         assert radNormale != null : "fx:id=\"radNormale\" was not injected: check your FXML file 'Scene.fxml'.";
         assert radDifficile != null : "fx:id=\"radDifficile\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtRange != null : "fx:id=\"txtRange\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert ckAssistita != null : "fx:id=\"ckAssistita\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert layoutRange != null : "fx:id=\"layoutRange\" was not injected: check your FXML file 'Scene.fxml'.";
     }
 }
