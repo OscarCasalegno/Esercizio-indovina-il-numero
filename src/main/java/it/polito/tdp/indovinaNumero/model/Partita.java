@@ -16,6 +16,36 @@ public class Partita {
     	this.inGioco=true;
 	}
 
+	public String doTentativo(String ts) {
+		int tentativo;
+    	try {
+    		tentativo=Integer.parseInt(ts);
+    	}catch(NumberFormatException e){
+    		return "DEVI INSERIRE UN NUMERO\n";
+    		    	}
+    	
+    	this.tentativiFatti++;
+    	if(tentativo==this.segreto) {
+    		this.inGioco=false;
+    		return "HAI VINTO!!! Hai utilizzato "+this.tentativiFatti+" tentativi";
+    	}
+    	
+    	if(tentativiFatti==TMAX) {
+    		//ho esaurito i tentativi --> ho perso
+    		this.inGioco=false;
+    		return "HAI PERSO!!! il numero segreto era "+this.segreto;
+    	}
+    	
+    	if(tentativo<this.segreto) {
+    		return "Tentativo troppo basso\n";
+    	}else {
+    		return "Tentativo troppo alto\n";
+    	}
+	}
+
+	
+	
+	
 	public int getTentativiRimasti() {
 		return TMAX-this.tentativiFatti;
 	}

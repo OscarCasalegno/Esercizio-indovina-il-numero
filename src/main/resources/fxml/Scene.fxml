@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.indovinaNumero.FXMLController">
    <top>
       <Label text="Indovina il Numero!" BorderPane.alignment="CENTER" />
@@ -21,7 +20,7 @@
                <children>
                   <Button fx:id="btnNuova" mnemonicParsing="false" onAction="#doNuova" text="Nuova Partita" />
                   <Label text="Tentativi Rimasti" />
-                  <TextField fx:id="txtRimasti" disable="true" editable="false" />
+                  <TextField fx:id="txtRimasti" editable="false" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -40,7 +39,7 @@
       </VBox>
    </center>
    <bottom>
-      <TextArea fx:id="txtRisultato" disable="true" editable="false" BorderPane.alignment="TOP_CENTER">
+      <TextArea fx:id="txtRisultato" editable="false" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
