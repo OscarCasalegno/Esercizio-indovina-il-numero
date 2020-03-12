@@ -2,16 +2,26 @@ package it.polito.tdp.indovinaNumero.model;
 
 public class Partita {
 	
-	private final int NMAX = 100;
-	private final int TMAX = 8;
+	private int numeroMassimo;
+	private int tentativiMassimi;
 	private int segreto;
 	private int tentativiFatti;
 	private boolean inGioco= false;
 	
 	
-	public Partita() {
+	public Partita(String difficolta) {
 		//gestione dell'inizio di una nuova partita - Logica del gioco
-    	this.segreto=(int) (Math.random()*NMAX) +1;
+		if(difficolta.contentEquals("Facile")) {
+			numeroMassimo=10;
+			tentativiMassimi=4;
+		}else if(difficolta.contentEquals("Normale")) {
+			numeroMassimo=50;
+			tentativiMassimi=6;
+		}else if(difficolta.contentEquals("Difficile")) {
+			numeroMassimo=100;
+			tentativiMassimi=7;
+		}
+    	this.segreto=(int) (Math.random()*numeroMassimo) +1;
     	this.tentativiFatti=0;
     	this.inGioco=true;
 	}
@@ -24,13 +34,17 @@ public class Partita {
     		return "DEVI INSERIRE UN NUMERO\n";
     		    	}
     	
+    	if(tentativo<1 || tentativo>numeroMassimo) {
+    		return "Inserisci un numero nell'intervallo [1;"+numeroMassimo+"]\n";
+    	}
+    	
     	this.tentativiFatti++;
     	if(tentativo==this.segreto) {
     		this.inGioco=false;
     		return "HAI VINTO!!! Hai utilizzato "+this.tentativiFatti+" tentativi";
     	}
     	
-    	if(tentativiFatti==TMAX) {
+    	if(tentativiFatti==tentativiMassimi) {
     		//ho esaurito i tentativi --> ho perso
     		this.inGioco=false;
     		return "HAI PERSO!!! il numero segreto era "+this.segreto;
@@ -46,16 +60,16 @@ public class Partita {
 	
 	public Double getProgresso() {
 		Double progresso;
-		progresso=(double)tentativiFatti/TMAX;
+		progresso=(double)tentativiFatti/tentativiMassimi;
 		return progresso;
 	}
 
-	public int getNMAX() {
-		return NMAX;
+	public int getnumeroMassimo() {
+		return numeroMassimo;
 	}
 
-	public int getTMAX() {
-		return TMAX;
+	public int gettentativiMassimi() {
+		return tentativiMassimi;
 	}
 
 	public int getSegreto() {

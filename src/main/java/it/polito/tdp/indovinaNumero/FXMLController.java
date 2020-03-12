@@ -8,8 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
 public class FXMLController {
@@ -39,11 +41,30 @@ public class FXMLController {
 
     @FXML
     private TextArea txtRisultato;
+    
+    @FXML
+    private RadioButton radFacile;
+
+    @FXML
+    private ToggleGroup difficoltà;
+
+    @FXML
+    private RadioButton radNormale;
+
+    @FXML
+    private RadioButton radDifficile;
 
     @FXML
     void doNuova(ActionEvent event) {
     	// inizializzazione nuova partita
-    	partita=new Partita();
+    	if(radFacile.isSelected()) {
+    		partita=new Partita("Facile");
+    	}else if(radNormale.isSelected()) {
+    		partita=new Partita("Normale");
+    	}else {
+    		partita=new Partita("Difficile");
+    	}
+    	
     	
     	// gestione dell'interfaccia
     	layoutTentativo.setDisable(false);
@@ -73,6 +94,9 @@ public class FXMLController {
         assert txtTentativi != null : "fx:id=\"txtTentativi\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnProva != null : "fx:id=\"btnProva\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtRisultato != null : "fx:id=\"txtRisultato\" was not injected: check your FXML file 'Scene.fxml'.";
-
+        assert radFacile != null : "fx:id=\"radFacile\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert difficoltà != null : "fx:id=\"Difficoltà\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert radNormale != null : "fx:id=\"radNormale\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert radDifficile != null : "fx:id=\"radDifficile\" was not injected: check your FXML file 'Scene.fxml'.";
     }
 }
