@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -25,7 +26,7 @@ public class FXMLController {
     private Button btnNuova;
 
     @FXML
-    private TextField txtRimasti;
+    private ProgressBar barProgresso;
 
     @FXML
     private HBox layoutTentativo;
@@ -47,7 +48,7 @@ public class FXMLController {
     	// gestione dell'interfaccia
     	layoutTentativo.setDisable(false);
     	txtRisultato.clear();
-    	txtRimasti.setText(Integer.toString(partita.getTentativiRimasti()));
+    	barProgresso.setProgress(0);
     }
 
     @FXML
@@ -56,7 +57,7 @@ public class FXMLController {
     	String ts=txtTentativi.getText();
     	txtTentativi.clear();
     	txtRisultato.appendText(partita.doTentativo(ts));
-    	txtRimasti.setText(Integer.toString(partita.getTentativiRimasti()));
+    	barProgresso.setProgress(partita.getProgresso());
     	
     	if(!partita.isInGioco()) {
     		layoutTentativo.setDisable(true);
@@ -67,7 +68,7 @@ public class FXMLController {
     @FXML
     void initialize() {
         assert btnNuova != null : "fx:id=\"btnNuova\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtRimasti != null : "fx:id=\"txtRimasti\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert barProgresso != null : "fx:id=\"barProgresso\" was not injected: check your FXML file 'Scene.fxml'.";
         assert layoutTentativo != null : "fx:id=\"layoutTentativo\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtTentativi != null : "fx:id=\"txtTentativi\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnProva != null : "fx:id=\"btnProva\" was not injected: check your FXML file 'Scene.fxml'.";

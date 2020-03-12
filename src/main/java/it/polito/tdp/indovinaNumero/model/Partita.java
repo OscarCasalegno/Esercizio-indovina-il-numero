@@ -42,12 +42,12 @@ public class Partita {
     		return "Tentativo troppo alto\n";
     	}
 	}
-
 	
 	
-	
-	public int getTentativiRimasti() {
-		return TMAX-this.tentativiFatti;
+	public Double getProgresso() {
+		Double progresso;
+		progresso=(double)tentativiFatti/TMAX;
+		return progresso;
 	}
 
 	public int getNMAX() {
