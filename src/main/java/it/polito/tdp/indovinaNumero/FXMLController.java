@@ -11,11 +11,7 @@ import javafx.scene.layout.HBox;
 
 public class FXMLController {
 	
-	private final int NMAX = 100;
-	private final int TMAX = 8;
-	private int segreto;
-	private int tentativiFatti;
-	private boolean inGioco= false;
+	private Partita partita;
 	
     @FXML
     private ResourceBundle resources;
