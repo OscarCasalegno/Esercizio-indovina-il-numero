@@ -1,5 +1,7 @@
 package it.polito.tdp.indovinaNumero.model;
 
+import java.util.ArrayList;
+
 public class Partita {
 	
 	private int numeroMassimo;
@@ -7,7 +9,7 @@ public class Partita {
 	private int min;
 	private int max;
 	private int segreto;
-	private int tentativiFatti;
+	private ArrayList<Integer> tentativi;
 	private boolean inGioco= false;
 	
 	
@@ -26,8 +28,8 @@ public class Partita {
 		min=0;
 		max=numeroMassimo+1;
     	this.segreto=(int) (Math.random()*numeroMassimo) +1;
-    	this.tentativiFatti=0;
     	this.inGioco=true;
+    	tentativi=new ArrayList<Integer>();
 	}
 
 	public String doTentativo(String ts) {
@@ -42,13 +44,17 @@ public class Partita {
     		return "Inserisci un numero nell'intervallo [1;"+numeroMassimo+"]\n";
     	}
     	
-    	this.tentativiFatti++;
-    	if(tentativo==this.segreto) {
-    		this.inGioco=false;
-    		return "HAI VINTO!!! Hai utilizzato "+this.tentativiFatti+" tentativi";
+    	if(tentativi.contains(tentativo)) {
+    		return "Numero già inserito\n";
     	}
     	
-    	if(tentativiFatti==tentativiMassimi) {
+    	tentativi.add(tentativo);
+    	if(tentativo==this.segreto) {
+    		this.inGioco=false;
+    		return "HAI VINTO!!! Hai utilizzato "+this.tentativi.size()+" tentativi";
+    	}
+    	
+    	if(tentativi.size()==tentativiMassimi) {
     		//ho esaurito i tentativi --> ho perso
     		this.inGioco=false;
     		return "HAI PERSO!!! il numero segreto era "+this.segreto;
@@ -70,7 +76,7 @@ public class Partita {
 	
 	public Double getProgresso() {
 		Double progresso;
-		progresso=(double)tentativiFatti/tentativiMassimi;
+		progresso=(double)tentativi.size()/tentativiMassimi;
 		return progresso;
 	}
 	
@@ -78,27 +84,9 @@ public class Partita {
 		return "["+(min+1)+";"+(max-1)+"]";
 	}
 
-	public int getnumeroMassimo() {
-		return numeroMassimo;
-	}
-
-	public int gettentativiMassimi() {
-		return tentativiMassimi;
-	}
-
-	public int getSegreto() {
-		return segreto;
-	}
-
-	public int getTentativiFatti() {
-		return tentativiFatti;
-	}
-
 	public boolean isInGioco() {
 		return inGioco;
 	}
 
-	
-	
-	
+
 }
